@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dataTransaksi" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="e8921e67-23e9-4fda-b403-db7d14278030">
+	<property name="ireport.zoom" value="1.0"/>
+	<import value="java.util.*"/>
+	<import value="java.text.*"/>
+	<parameter name="LOGO" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="NAMA_ADMIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Admin"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TANGGAL_CETAK" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TGL_AWAL" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.sql.Date(0L)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TGL_AKHIR" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.sql.Date(System.currentTimeMillis())]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT t.id_transaksi AS id_transaksi,
+       t.tanggal AS tanggal,
+       t.total_harga AS total_harga,
+       d.nama_layanan AS nama_layanan,
+       d.harga AS harga
+FROM transaksi t
+JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
+WHERE t.tanggal BETWEEN $P{TGL_AWAL} AND $P{TGL_AKHIR}
+ORDER BY t.tanggal, t.id_transaksi]]>
+	</queryString>
+	<field name="id_transaksi" class="java.lang.String"/>
+	<field name="tanggal" class="java.sql.Date"/>
+	<field name="total_harga" class="java.lang.Long"/>
+	<field name="nama_layanan" class="java.lang.String"/>
+	<field name="harga" class="java.lang.Long"/>
+	<group name="grpTransaksi">
+		<groupExpression><![CDATA[$F{id_transaksi}]]></groupExpression>
+		<groupHeader>
+			<band height="26">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#F0E0E8" uuid="5788d4e7-ba9a-453d-a962-153fd008f38e"/>
+					<box leftPadding="4">
+						<pen lineWidth="0.5" lineColor="#660033"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ID Transaksi : " + $F{id_transaksi}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd-MM-yyyy">
+					<reportElement mode="Opaque" x="180" y="0" width="170" height="20" backcolor="#F0E0E8" uuid="60169486-ab9b-4af9-83a1-eaea6d24b692"/>
+					<box leftPadding="4">
+						<pen lineWidth="0.5" lineColor="#660033"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tanggal : " + new java.text.SimpleDateFormat("dd-MM-yyyy").format($F{tanggal})]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement mode="Opaque" x="350" y="0" width="165" height="20" backcolor="#F0E0E8" uuid="c589d925-fcc9-4bc9-ab22-3a14ef71fa0c"/>
+					<box rightPadding="6">
+						<pen lineWidth="0.5" lineColor="#660033"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Segoe UI" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total : Rp " + $F{total_harga}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="140">
+			<image>
+				<reportElement x="0" y="0" width="65" height="65" uuid="527f2d36-0db2-4251-821b-338ef6e67183"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="70" width="515" height="1" uuid="ebf1ec2b-96c6-4579-a1ae-b66d6509ffac"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="90" width="515" height="30" uuid="e1fb0157-341d-4f1a-aaca-f004780dc96e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DATA TRANSAKSI]]></text>
+			</staticText>
+			<textField pattern="dd MMMM yyyy">
+				<reportElement x="0" y="120" width="515" height="16" uuid="0522dbef-35b2-4600-8f4f-e005f3990692"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Periode : " + new java.text.SimpleDateFormat("dd-MM-yyyy").format($P{TGL_AWAL}) + "  s/d  " + new java.text.SimpleDateFormat("dd-MM-yyyy").format($P{TGL_AKHIR})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="75" y="1" width="440" height="26" uuid="05043b85-0d74-4cfd-9a54-54c1aaadf81c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BERJODOH WEDDING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="27" width="440" height="35" uuid="c22fb978-c4ce-4a71-97aa-67b934eb5db2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Segoe UI" size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Online Wedding Service | IG: @berjodohwedding | WA: +62 895-6223-66516 | Email: berjodohwedding@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="345" height="22" forecolor="#FFFFFF" backcolor="#660033" uuid="3b8faa56-6693-48bd-96a2-8e46988f264f"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Layanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="170" height="22" forecolor="#FFFFFF" backcolor="#660033" uuid="6303599a-6948-407e-b7a4-0f9f85a4b9f9"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="345" height="20" uuid="0b90f0ce-943d-4a84-a5d5-7770fce5ed02"/>
+				<box leftPadding="10">
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_layanan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="345" y="0" width="170" height="20" uuid="d49be622-323a-478c-aca4-49c7751bd54d"/>
+				<box rightPadding="6">
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp " + $F{harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="120">
+			<textField pattern="&apos;Jakarta, &apos; dd MMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="335" y="30" width="180" height="18" uuid="19757c1c-f173-49ea-b959-408ae9379724"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TANGGAL_CETAK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="95" width="180" height="18" uuid="09bbe854-c88f-4814-90ff-4a700f95ad4d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NAMA_ADMIN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

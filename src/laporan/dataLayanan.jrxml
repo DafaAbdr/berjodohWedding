@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dataLayanan" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="3a8e7005-b4d5-401c-98d3-fbd9a1eed4ae">
+	<property name="ireport.zoom" value="1.0"/>
+	<import value="java.util.*"/>
+	<import value="java.text.*"/>
+	<parameter name="LOGO" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="NAMA_ADMIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Admin"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TANGGAL_CETAK" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id, nama_layanan, harga FROM datalayanan ORDER BY id]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="nama_layanan" class="java.lang.String"/>
+	<field name="harga" class="java.lang.Long"/>
+	<variable name="totalHarga" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{harga}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="140">
+			<image>
+				<reportElement x="0" y="0" width="65" height="65" uuid="ebdb1244-220f-4214-ac5c-c2f68a4d2ebe"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="75" y="1" width="440" height="26" uuid="4df5a6ae-812d-4622-991f-662538673c7a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BERJODOH WEDDING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="27" width="440" height="35" uuid="5d6418a6-c800-42ce-9442-be8643d16d36"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Segoe UI" size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Online Wedding Service | IG: @berjodohwedding | WA: +62 895-6223-66516 | Email: berjodohwedding@gmail.com]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="70" width="515" height="1" uuid="66c06118-05de-4b83-95f8-6525a1c3476c"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="90" width="515" height="30" uuid="9c1d7ce8-9ed7-44da-8d7e-3f315cc90670"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DATA LAYANAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="24">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="40" height="24" forecolor="#FFFFFF" backcolor="#660033" uuid="9c8875ce-2749-4907-ba4e-45eb4f2b00bf"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11" isBold="true" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="40" y="0" width="80" height="24" forecolor="#FFFFFF" backcolor="#660033" uuid="57f40731-d37d-4105-ae12-80da669d64be"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Layanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="120" y="0" width="255" height="24" forecolor="#FFFFFF" backcolor="#660033" uuid="e602ffe9-bf7b-4f97-9825-056efda05516"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Layanan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="375" y="0" width="140" height="24" forecolor="#FFFFFF" backcolor="#660033" uuid="0450fff9-fa76-4d2f-b995-79be7f4d8d94"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="22" uuid="6daa624f-8af0-4c23-9a6c-b0fde69fbc10"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="80" height="22" uuid="d76cfc07-df08-48f4-8247-d2795110518a"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="255" height="22" uuid="f6c205a8-a9f4-47f6-b65c-c596a66bc4c1"/>
+				<box leftPadding="6">
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_layanan}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="375" y="0" width="140" height="22" uuid="80ae66be-eb8b-4447-9708-8aa0a31ee95e"/>
+				<box rightPadding="6">
+					<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp. " + $F{harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="120">
+			<textField isBlankWhenNull="true">
+				<reportElement x="335" y="36" width="180" height="18" uuid="08ad3ff3-055e-4a84-ae72-cac3f7c4e75a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Jakarta, " + new java.text.SimpleDateFormat(
+    "dd MMMM yyyy",
+    new java.util.Locale("id", "ID")
+).format($P{TANGGAL_CETAK})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="102" width="180" height="18" uuid="f170ebc8-2215-49cc-94ac-77e8b1a88998"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NAMA_ADMIN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

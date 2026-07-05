@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dataProses" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="30" bottomMargin="30" uuid="eba45b94-973d-48c1-9f94-eab15965d275">
+	<property name="ireport.zoom" value="1.0"/>
+	<import value="java.util.*"/>
+	<import value="java.text.*"/>
+	<style name="tableHeaderStyle" mode="Opaque" forecolor="#FFFFFF" backcolor="#660033">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="dsAturan" uuid="cf5f80e3-a4b8-4bea-aa8c-136165ac18e2">
+		<parameter name="ID_PROSES" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT aturan, support, confidence, keterangan
+FROM detail_hasil_asosiasi
+WHERE id_hasil_asosiasi = $P{ID_PROSES}
+ORDER BY confidence DESC]]>
+		</queryString>
+		<field name="aturan" class="java.lang.String"/>
+		<field name="support" class="java.lang.Double"/>
+		<field name="confidence" class="java.lang.Double"/>
+		<field name="keterangan" class="java.lang.String"/>
+		<variable name="noRule" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{aturan}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="LOGO" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="NAMA_ADMIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Admin"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TANGGAL_CETAK" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PROSES" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id, tanggal_proses, mulai_tanggal, sampai_tanggal, min_support, min_confidence
+FROM hasil_asosiasi
+WHERE id = $P{ID_PROSES}]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="tanggal_proses" class="java.sql.Date"/>
+	<field name="mulai_tanggal" class="java.sql.Date"/>
+	<field name="sampai_tanggal" class="java.sql.Date"/>
+	<field name="min_support" class="java.lang.Double"/>
+	<field name="min_confidence" class="java.lang.Double"/>
+	<title>
+		<band height="140">
+			<image>
+				<reportElement x="0" y="0" width="65" height="65" uuid="42248cb4-2909-4fb9-8803-b442ce696237"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="70" width="515" height="1" uuid="cac21f8d-0292-4cd1-9597-f42f7a4ad94d"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="90" width="515" height="30" uuid="cbc2f8c0-007d-4fcb-b337-77e801b8ade5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN DATA PROSES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="1" width="440" height="26" uuid="17864b1e-781b-4847-b85e-40afc4938295"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BERJODOH WEDDING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="27" width="440" height="35" uuid="9b3137f0-c638-4560-97f4-5293f8b6a9d0"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Segoe UI" size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Online Wedding Service | IG: @berjodohwedding | WA: +62 895-6223-66516 | Email: berjodohwedding@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="600" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="e9fd2d6a-f7b1-46aa-8e44-edd1f9a9a5c2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  INFORMASI PROSES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="130" height="18" uuid="a54e0949-1bfc-46b6-957e-7f244738fbe8"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[ID Proses]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="20" width="255" height="18" uuid="b7c61bf0-6acd-4d46-9395-3befdd02ac51"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="38" width="130" height="18" uuid="f6439fac-ef89-4ec4-aa2d-0558b2d3f850"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Tanggal Proses]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="130" y="38" width="255" height="18" uuid="9a729771-98e1-449c-8d9a-3e642e23bd7f"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_proses}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="56" width="130" height="18" uuid="fc3be3cd-8d0b-411b-bed7-51adacc8bf20"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Periode Data Transaksi]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="130" y="56" width="120" height="18" uuid="629322fa-992d-4a7d-932e-afd28656c925"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mulai_tanggal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="250" y="56" width="20" height="18" uuid="e55dfd13-89b6-4d1d-9497-62afb511d825"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[s/d]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="270" y="56" width="115" height="18" uuid="f5ae1f8b-7cba-4a0b-b328-a4697e799f79"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sampai_tanggal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="74" width="130" height="18" uuid="13ff592a-a300-4c24-8a52-e5652e5d70b5"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Minimum Support]]></text>
+			</staticText>
+			<textField pattern="0.##">
+				<reportElement x="130" y="74" width="120" height="18" uuid="1d3079b2-c174-42d7-a27a-3fb26c66a80e"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{min_support} + " %"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="250" y="74" width="115" height="18" uuid="9d5a705f-104f-4dd7-94d7-2d66d8072957"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<text><![CDATA[Minimum Confidence]]></text>
+			</staticText>
+			<textField pattern="0.##">
+				<reportElement x="365" y="74" width="130" height="18" uuid="9828e83e-d8a8-45f0-904c-1ea555c8eff5"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{min_confidence} + " %"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="102" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="08ec4612-94c7-4c1b-8840-a57a981b367e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  RULE ASOSIASI YANG TERBENTUK]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="122" width="515" height="200" uuid="4e7bc6d7-3821-4d57-b859-5f3861838a5d"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dsAturan" uuid="93d84212-2b15-40fe-8c3c-fdeb37a23ff2">
+						<datasetParameter name="ID_PROSES">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="25" uuid="76860914-c85e-4b2d-9f55-551b268f0970">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="25" height="20" forecolor="#FFFFFF" uuid="bf027490-bbab-43d3-be6d-b5e76c533a21"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="18">
+							<textField>
+								<reportElement x="0" y="0" width="25" height="18" uuid="75feb7f4-d4bd-4d17-a390-d25cf7880c04"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{noRule}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="225" uuid="b3dfaf9b-6245-47c9-8e6c-3c4034ce3152">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="225" height="20" forecolor="#FFFFFF" uuid="cb670da8-5eae-43b5-9441-d4f67af2e04a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Aturan (Antecedent -> Consequent)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="18">
+							<textField>
+								<reportElement x="0" y="0" width="225" height="18" uuid="52765038-7922-48cf-af67-ce2e1ca396c1"/>
+								<box leftPadding="4">
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{aturan}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="f6d64e0e-7a16-4d84-8086-b5671332c6f9">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="d561db0c-9284-4bf4-874d-419f91a12c24"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Support (%)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="18">
+							<textField pattern="0.00">
+								<reportElement x="0" y="0" width="80" height="18" uuid="283f994e-e642-4a1c-b9f9-cddefc2eaa6c"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{support}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="1f5a6ad3-610e-4407-9be4-d0d1ba9c2693">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20" forecolor="#FFFFFF" uuid="bd94b337-c944-4d1e-af48-389bc55f45b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Confidence (%)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="18">
+							<textField pattern="0.00">
+								<reportElement x="0" y="0" width="90" height="18" uuid="9b67e7f2-1134-4ed2-97ff-f2f0a5d38d2b"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{confidence}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="95" uuid="aa3fb36f-5492-46b2-88b5-706b23b38ca6">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="95" height="20" forecolor="#FFFFFF" uuid="674be16e-66ff-4db5-9481-747de408fd2a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Keterangan]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="18">
+							<textField>
+								<reportElement x="0" y="0" width="95" height="18" uuid="4abc000f-4369-4cbe-957f-6330ad97e6ef"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="335" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="207e7858-54e2-4023-817b-510b3bb6c510"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  HASIL ANALISA]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="355" width="515" height="200" uuid="215d6553-8327-4a3b-bdf5-2c6fd3c6760d"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dsAturan" uuid="83ae99a0-b9a1-49da-a98c-395aa1c15080">
+						<datasetParameter name="ID_PROSES">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="9ef8f523-4da5-4e44-be97-a5402f6a54ff">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="20" forecolor="#FFFFFF" uuid="2a594869-dfba-4109-b5d9-055de44a7d80"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="26" uuid="39153cf2-8f4f-45fd-a58a-607011dd9f08"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{noRule}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="485" uuid="40c51fb9-48a2-4255-b298-e7c4fdea061f">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="485" height="20" forecolor="#FFFFFF" uuid="da40632a-528d-41b4-a0e0-dbb71ae9611b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Keterangan]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="485" height="26" uuid="0746d895-5d46-46ab-8824-b24e099500e8"/>
+								<box topPadding="3" leftPadding="4" bottomPadding="3">
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Jika konsumen membeli " + $F{aturan}.substring(0, $F{aturan}.indexOf("->")).trim() + ", maka konsumen juga akan membeli " + $F{aturan}.substring($F{aturan}.indexOf("->") + 2).trim() + "."]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="120">
+			<textField pattern="&apos;Jakarta, &apos; dd MMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="335" y="30" width="180" height="18" uuid="0054dbea-0a2c-48ff-aa37-fef4c2d686e8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TANGGAL_CETAK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="95" width="180" height="18" uuid="c2dd0348-e7ec-45a8-b2e3-dd7a94013f2c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NAMA_ADMIN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
