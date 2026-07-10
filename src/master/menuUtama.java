@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import koneksi.koneksi;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
@@ -91,8 +92,16 @@ public class menuUtama extends javax.swing.JFrame {
         pn_acc.setBackground(new java.awt.Color(102, 0, 51));
         pn_acc.setForeground(new java.awt.Color(255, 255, 255));
         pn_acc.setPreferredSize(new java.awt.Dimension(210, 37));
+        pn_acc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_accMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_accMouseExited(evt);
+            }
+        });
 
-        pn_liacc.setBackground(new java.awt.Color(255, 255, 255));
+        pn_liacc.setBackground(new java.awt.Color(102, 0, 51));
 
         javax.swing.GroupLayout pn_liaccLayout = new javax.swing.GroupLayout(pn_liacc);
         pn_liacc.setLayout(pn_liaccLayout);
@@ -107,9 +116,13 @@ public class menuUtama extends javax.swing.JFrame {
 
         jLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/dashboard.png"))); // NOI18N
         jLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelMouseExited(evt);
             }
         });
 
@@ -151,7 +164,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGroup(pn_accLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_accLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_acc, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btn_acc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pn_accLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,8 +180,16 @@ public class menuUtama extends javax.swing.JFrame {
         jLabel3.setText("MASTER DATA");
 
         pn_div.setBackground(new java.awt.Color(102, 0, 51));
+        pn_div.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_divMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_divMouseExited(evt);
+            }
+        });
 
-        pn_lidiv.setBackground(new java.awt.Color(255, 255, 255));
+        pn_lidiv.setBackground(new java.awt.Color(102, 0, 51));
 
         javax.swing.GroupLayout pn_lidivLayout = new javax.swing.GroupLayout(pn_lidiv);
         pn_lidiv.setLayout(pn_lidivLayout);
@@ -182,10 +203,15 @@ public class menuUtama extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/layanan.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
             }
         });
 
@@ -227,7 +253,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGroup(pn_divLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_divLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_div, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btn_div, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pn_divLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,8 +264,16 @@ public class menuUtama extends javax.swing.JFrame {
         );
 
         pn_employee.setBackground(new java.awt.Color(102, 0, 51));
+        pn_employee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_employeeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_employeeMouseExited(evt);
+            }
+        });
 
-        pn_liemployee.setBackground(new java.awt.Color(255, 255, 255));
+        pn_liemployee.setBackground(new java.awt.Color(102, 0, 51));
 
         javax.swing.GroupLayout pn_liemployeeLayout = new javax.swing.GroupLayout(pn_liemployee);
         pn_liemployee.setLayout(pn_liemployeeLayout);
@@ -254,9 +288,13 @@ public class menuUtama extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/transaksi.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel5MouseExited(evt);
             }
         });
 
@@ -298,7 +336,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGroup(pn_employeeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_employeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_employee, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btn_employee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pn_employeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,8 +347,16 @@ public class menuUtama extends javax.swing.JFrame {
         );
 
         pn_employee1.setBackground(new java.awt.Color(102, 0, 51));
+        pn_employee1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_employee1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_employee1MouseExited(evt);
+            }
+        });
 
-        pn_liemployee1.setBackground(new java.awt.Color(255, 255, 255));
+        pn_liemployee1.setBackground(new java.awt.Color(102, 0, 51));
 
         javax.swing.GroupLayout pn_liemployee1Layout = new javax.swing.GroupLayout(pn_liemployee1);
         pn_liemployee1.setLayout(pn_liemployee1Layout);
@@ -325,9 +371,13 @@ public class menuUtama extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/proses.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
             }
         });
 
@@ -369,7 +419,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGroup(pn_employee1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_employee1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_employee1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btn_employee1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pn_employee1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,8 +430,16 @@ public class menuUtama extends javax.swing.JFrame {
         );
 
         pn_employee2.setBackground(new java.awt.Color(102, 0, 51));
+        pn_employee2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pn_employee2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pn_employee2MouseExited(evt);
+            }
+        });
 
-        pn_liemployee2.setBackground(new java.awt.Color(255, 255, 255));
+        pn_liemployee2.setBackground(new java.awt.Color(102, 0, 51));
 
         javax.swing.GroupLayout pn_liemployee2Layout = new javax.swing.GroupLayout(pn_liemployee2);
         pn_liemployee2.setLayout(pn_liemployee2Layout);
@@ -396,9 +454,13 @@ public class menuUtama extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/laporan.png"))); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
             }
         });
 
@@ -440,7 +502,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGroup(pn_employee2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pn_employee2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_employee2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(btn_employee2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pn_employee2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,11 +566,11 @@ public class menuUtama extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         jPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -521,17 +583,17 @@ public class menuUtama extends javax.swing.JFrame {
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(252, Short.MAX_VALUE)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(262, 262, 262)
                 .addComponent(jLabel1)
-                .addGap(248, 248, 248))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(168, 168, 168))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(jLabel1)
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         lNama.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -563,27 +625,28 @@ public class menuUtama extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(bKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lNama, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lNama, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bKeluar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
                         .addComponent(lNama)
-                        .addGap(29, 29, 29)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -601,7 +664,7 @@ public class menuUtama extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMouseEntered
-
+        pn_liacc.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_jLabelMouseEntered
 
     private void btn_accMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_accMouseClicked
@@ -616,15 +679,15 @@ public class menuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_accMouseClicked
 
     private void btn_accMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_accMouseEntered
-
+        pn_liacc.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_btn_accMouseEntered
 
     private void btn_accMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_accMouseExited
-
+        pn_liacc.setBackground(new Color(102,0,51));
     }//GEN-LAST:event_btn_accMouseExited
 
     private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
-        // TODO add your handling code here:
+        pn_lidiv.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_jLabel4MouseEntered
 
     private void btn_divMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_divMouseClicked
@@ -639,15 +702,15 @@ public class menuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_divMouseClicked
 
     private void btn_divMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_divMouseEntered
-
+        pn_lidiv.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_btn_divMouseEntered
 
     private void btn_divMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_divMouseExited
-
+        pn_lidiv.setBackground(new Color(102,0,51));
     }//GEN-LAST:event_btn_divMouseExited
 
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
-        // TODO add your handling code here:
+        pn_liemployee.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_jLabel5MouseEntered
 
     private void btn_employeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employeeMouseClicked
@@ -662,15 +725,15 @@ public class menuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_employeeMouseClicked
 
     private void btn_employeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employeeMouseEntered
-
+        pn_liemployee.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_btn_employeeMouseEntered
 
     private void btn_employeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employeeMouseExited
-
+        pn_liemployee.setBackground(new Color(102,0,51));
     }//GEN-LAST:event_btn_employeeMouseExited
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
-        // TODO add your handling code here:
+        pn_liemployee1.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void btn_employee1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee1MouseClicked
@@ -685,15 +748,15 @@ public class menuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_employee1MouseClicked
 
     private void btn_employee1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee1MouseEntered
-        // TODO add your handling code here:
+        pn_liemployee1.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_btn_employee1MouseEntered
 
     private void btn_employee1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee1MouseExited
-        // TODO add your handling code here:
+        pn_liemployee1.setBackground(new Color(102,0,51));
     }//GEN-LAST:event_btn_employee1MouseExited
 
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        // TODO add your handling code here:
+        pn_liemployee2.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_jLabel7MouseEntered
 
     private void btn_employee2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee2MouseClicked
@@ -708,11 +771,11 @@ public class menuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_employee2MouseClicked
 
     private void btn_employee2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee2MouseEntered
-        // TODO add your handling code here:
+        pn_liemployee2.setBackground(new Color(250,250,250));
     }//GEN-LAST:event_btn_employee2MouseEntered
 
     private void btn_employee2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_employee2MouseExited
-        // TODO add your handling code here:
+        pn_liemployee2.setBackground(new Color(102,0,51));
     }//GEN-LAST:event_btn_employee2MouseExited
 
     private void bKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bKeluarMouseClicked
@@ -721,6 +784,66 @@ public class menuUtama extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_bKeluarMouseClicked
+
+    private void pn_accMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_accMouseEntered
+        pn_liacc.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_pn_accMouseEntered
+
+    private void pn_accMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_accMouseExited
+        pn_liacc.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_pn_accMouseExited
+
+    private void jLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMouseExited
+        pn_liacc.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_jLabelMouseExited
+
+    private void pn_divMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_divMouseEntered
+        pn_lidiv.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_pn_divMouseEntered
+
+    private void pn_employeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employeeMouseEntered
+        pn_liemployee.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_pn_employeeMouseEntered
+
+    private void pn_employee1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employee1MouseEntered
+        pn_liemployee1.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_pn_employee1MouseEntered
+
+    private void pn_employee2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employee2MouseEntered
+        pn_liemployee2.setBackground(new Color(250,250,250));
+    }//GEN-LAST:event_pn_employee2MouseEntered
+
+    private void pn_divMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_divMouseExited
+        pn_lidiv.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_pn_divMouseExited
+
+    private void pn_employeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employeeMouseExited
+        pn_liemployee.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_pn_employeeMouseExited
+
+    private void pn_employee1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employee1MouseExited
+        pn_liemployee1.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_pn_employee1MouseExited
+
+    private void pn_employee2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_employee2MouseExited
+        pn_liemployee2.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_pn_employee2MouseExited
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        pn_lidiv.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_jLabel4MouseExited
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        pn_liemployee.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_jLabel5MouseExited
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        pn_liemployee1.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
+        pn_liemployee2.setBackground(new Color(102,0,51));
+    }//GEN-LAST:event_jLabel7MouseExited
 
     /**
      * @param args the command line arguments
