@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import koneksi.koneksi;
+import popUp.detailTransaksi;
 
 /**
  *
@@ -29,7 +30,42 @@ public class dataTransaksi extends javax.swing.JPanel {
         idTransaksiOtomatis();
         tampilComboLayanan();
         tampilDetailTransaksi();
+        tampilDataTransaksi();
         bersih();
+    }
+    
+    private void tampilDataTransaksi() {
+        DefaultTableModel model = new DefaultTableModel();
+
+        model.addColumn("ID Transaksi");
+        model.addColumn("Tanggal");
+        model.addColumn("Total Harga");
+
+        try {
+
+            Connection conn = koneksi.getConnection();
+
+            String sql = "SELECT * FROM transaksi ORDER BY id_transaksi DESC";
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                model.addRow(new Object[]{
+                    rs.getString("id_transaksi"),
+                    rs.getDate("tanggal"),
+                    "Rp. " + String.format("%,d", rs.getLong("total_harga")).replace(',', '.')
+                });
+
+            }
+
+            tableTransaksi.setModel(model);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }
     
     private void bersih() {
@@ -143,6 +179,8 @@ public class dataTransaksi extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         tIDTransaksi = new javax.swing.JTextField();
         tTanggal = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableTransaksi = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -169,6 +207,7 @@ public class dataTransaksi extends javax.swing.JPanel {
         bTambahkan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bTambahkan.setForeground(new java.awt.Color(255, 255, 255));
         bTambahkan.setText("Tambahkan");
+        bTambahkan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bTambahkan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bTambahkanActionPerformed(evt);
@@ -192,6 +231,7 @@ public class dataTransaksi extends javax.swing.JPanel {
         bSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bSimpan.setForeground(new java.awt.Color(255, 255, 255));
         bSimpan.setText("Simpan");
+        bSimpan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bSimpan.setMaximumSize(new java.awt.Dimension(74, 23));
         bSimpan.setMinimumSize(new java.awt.Dimension(74, 23));
         bSimpan.setPreferredSize(new java.awt.Dimension(74, 23));
@@ -205,6 +245,7 @@ public class dataTransaksi extends javax.swing.JPanel {
         bUbah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bUbah.setForeground(new java.awt.Color(255, 255, 255));
         bUbah.setText("Ubah");
+        bUbah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bUbah.setMaximumSize(new java.awt.Dimension(74, 23));
         bUbah.setMinimumSize(new java.awt.Dimension(74, 23));
         bUbah.setPreferredSize(new java.awt.Dimension(74, 23));
@@ -213,6 +254,7 @@ public class dataTransaksi extends javax.swing.JPanel {
         bHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bHapus.setForeground(new java.awt.Color(255, 255, 255));
         bHapus.setText("Hapus");
+        bHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bHapus.setMaximumSize(new java.awt.Dimension(74, 23));
         bHapus.setMinimumSize(new java.awt.Dimension(74, 23));
         bHapus.setPreferredSize(new java.awt.Dimension(74, 23));
@@ -221,11 +263,30 @@ public class dataTransaksi extends javax.swing.JPanel {
         bBersihkan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         bBersihkan.setForeground(new java.awt.Color(255, 255, 255));
         bBersihkan.setText("Bersihkan");
+        bBersihkan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bBersihkan.setMaximumSize(new java.awt.Dimension(74, 23));
         bBersihkan.setMinimumSize(new java.awt.Dimension(74, 23));
         bBersihkan.setPreferredSize(new java.awt.Dimension(74, 23));
 
         jLabel5.setText("Tanggal");
+
+        tableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableTransaksiMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableTransaksi);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -233,37 +294,41 @@ public class dataTransaksi extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tTanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(tIDTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tNamaLayanan, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bTambahkan, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(tTanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(1, 1, 1)
+                                            .addComponent(tIDTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tNamaLayanan, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(24, 24, 24)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bTambahkan, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bBersihkan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21)
+                            .addComponent(bHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21)
+                            .addComponent(bUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21)
+                            .addComponent(bSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bBersihkan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(bHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(bUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(bSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,14 +353,16 @@ public class dataTransaksi extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(bUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bBersihkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -434,6 +501,20 @@ public class dataTransaksi extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_bSimpanActionPerformed
 
+    private void tableTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTransaksiMouseClicked
+        int baris = tableTransaksi.getSelectedRow();
+
+        if(baris == -1){
+            return;
+        }
+
+        String id = tableTransaksi.getValueAt(baris,0).toString();
+
+        popUp.detailTransaksi dt = new popUp.detailTransaksi(id);
+        dt.setVisible(true);
+
+    }//GEN-LAST:event_tableTransaksiMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBersihkan;
@@ -447,10 +528,12 @@ public class dataTransaksi extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField tHarga;
     private javax.swing.JTextField tIDTransaksi;
     private javax.swing.JComboBox<String> tNamaLayanan;
     private com.toedter.calendar.JDateChooser tTanggal;
     private javax.swing.JTable tabelTransaksi;
+    private javax.swing.JTable tableTransaksi;
     // End of variables declaration//GEN-END:variables
 }

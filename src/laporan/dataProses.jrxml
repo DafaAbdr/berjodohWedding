@@ -4,6 +4,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<import value="java.util.*"/>
 	<import value="java.text.*"/>
+	<import value="java.math.*"/>
 	<style name="tableHeaderStyle" mode="Opaque" forecolor="#FFFFFF" backcolor="#660033">
 		<box>
 			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
@@ -23,6 +24,27 @@ ORDER BY confidence DESC]]>
 		<field name="keterangan" class="java.lang.String"/>
 		<variable name="noRule" class="java.lang.Integer" calculation="Count">
 			<variableExpression><![CDATA[$F{aturan}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsPaket" uuid="7f4a2b1c-3e5d-4a9f-8b6c-2d1e9a0b4f3c">
+		<parameter name="ID_PROSES" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT DISTINCT t.paket_items, t.total_harga
+FROM (
+	SELECT dha.id,
+		(SELECT GROUP_CONCAT(dl.nama_layanan ORDER BY dl.nama_layanan SEPARATOR ' + ')
+		 FROM datalayanan dl WHERE dha.aturan LIKE CONCAT('%', dl.nama_layanan, '%')) AS paket_items,
+		(SELECT COALESCE(SUM(dl.harga),0)
+		 FROM datalayanan dl WHERE dha.aturan LIKE CONCAT('%', dl.nama_layanan, '%')) AS total_harga
+	FROM detail_hasil_asosiasi dha
+	WHERE dha.id_hasil_asosiasi = $P{ID_PROSES}
+) t
+ORDER BY t.total_harga DESC]]>
+		</queryString>
+		<field name="paket_items" class="java.lang.String"/>
+		<field name="total_harga" class="java.math.BigDecimal"/>
+		<variable name="noPaket" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{paket_items}]]></variableExpression>
 		</variable>
 	</subDataset>
 	<parameter name="LOGO" class="java.io.InputStream" isForPrompting="false"/>
@@ -82,7 +104,7 @@ WHERE id = $P{ID_PROSES}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="600" splitType="Stretch">
+		<band height="236" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="e9fd2d6a-f7b1-46aa-8e44-edd1f9a9a5c2"/>
 				<textElement verticalAlignment="Middle">
@@ -182,7 +204,7 @@ WHERE id = $P{ID_PROSES}]]>
 				<text><![CDATA[  RULE ASOSIASI YANG TERBENTUK]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="0" y="122" width="515" height="200" uuid="4e7bc6d7-3821-4d57-b859-5f3861838a5d"/>
+				<reportElement positionType="Float" x="0" y="122" width="515" height="20" uuid="4e7bc6d7-3821-4d57-b859-5f3861838a5d"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="dsAturan" uuid="93d84212-2b15-40fe-8c3c-fdeb37a23ff2">
 						<datasetParameter name="ID_PROSES">
@@ -308,14 +330,14 @@ WHERE id = $P{ID_PROSES}]]>
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="0" y="335" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="207e7858-54e2-4023-817b-510b3bb6c510"/>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="145" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="207e7858-54e2-4023-817b-510b3bb6c510"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Segoe UI" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[  HASIL ANALISA]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="355" width="515" height="200" uuid="215d6553-8327-4a3b-bdf5-2c6fd3c6760d"/>
+				<reportElement positionType="Float" x="0" y="165" width="515" height="20" uuid="215d6553-8327-4a3b-bdf5-2c6fd3c6760d"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="dsAturan" uuid="83ae99a0-b9a1-49da-a98c-395aa1c15080">
 						<datasetParameter name="ID_PROSES">
@@ -371,16 +393,103 @@ WHERE id = $P{ID_PROSES}]]>
 					</jr:column>
 				</jr:table>
 			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="190" width="515" height="18" forecolor="#FFFFFF" backcolor="#660033" uuid="6a1b8c2d-4f3e-4a7b-9c5d-1e2f3a4b5c6d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  REKOMENDASI PAKET]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="210" width="515" height="20" uuid="8b2c3d4e-5f6a-4b8c-9d1e-2f3a4b5c6d7e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dsPaket" uuid="1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d">
+						<datasetParameter name="ID_PROSES">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="20" forecolor="#FFFFFF" uuid="3c4d5e6f-7a8b-4c9d-0e1f-2a3b4c5d6e7f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="26" uuid="4d5e6f7a-8b9c-4d0e-1f2a-3b4c5d6e7f8a"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{noPaket}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="350" uuid="5e6f7a8b-9c0d-4e1f-2a3b-4c5d6e7f8a9b">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="350" height="20" forecolor="#FFFFFF" uuid="6f7a8b9c-0d1e-4f2a-3b4c-5d6e7f8a9b0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Rekomendasi Paket]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26">
+							<textField textAdjust="StretchHeight">
+								<reportElement x="0" y="0" width="350" height="26" uuid="7a8b9c0d-1e2f-4a3b-4c5d-6e7f8a9b0c1d"/>
+								<box topPadding="3" leftPadding="4" bottomPadding="3">
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Paket " + (char)('A' + ($V{noPaket} - 1)) + " = " + $F{paket_items}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="135" uuid="8b9c0d1e-2f3a-4b4c-5d6e-7f8a9b0c1d2e">
+						<jr:columnHeader style="tableHeaderStyle" height="20">
+							<staticText>
+								<reportElement x="0" y="0" width="135" height="20" forecolor="#FFFFFF" uuid="9c0d1e2f-3a4b-4c5d-6e7f-8a9b0c1d2e3f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Harga]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="26">
+							<textField>
+								<reportElement x="0" y="0" width="135" height="26" uuid="0d1e2f3a-4b5c-4d6e-7f8a-9b0c1d2e3f4a"/>
+								<box>
+									<pen lineWidth="0.25" lineColor="#BFBFBF"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Segoe UI" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Rp " + new DecimalFormat("#,###", new DecimalFormatSymbols(new Locale("id","ID"))).format($F{total_harga})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
-	<summary>
+	<lastPageFooter>
 		<band height="120">
-			<textField pattern="&apos;Jakarta, &apos; dd MMMM yyyy" isBlankWhenNull="true">
+			<textField isBlankWhenNull="true">
 				<reportElement x="335" y="30" width="180" height="18" uuid="0054dbea-0a2c-48ff-aa37-fef4c2d686e8"/>
 				<textElement textAlignment="Center">
 					<font fontName="Segoe UI" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TANGGAL_CETAK}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Jakarta, " + new SimpleDateFormat("EEEE, dd MMMM yyyy", new Locale("id","ID")).format($P{TANGGAL_CETAK})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="335" y="95" width="180" height="18" uuid="c2dd0348-e7ec-45a8-b2e3-dd7a94013f2c"/>
@@ -393,5 +502,5 @@ WHERE id = $P{ID_PROSES}]]>
 				<textFieldExpression><![CDATA[$P{NAMA_ADMIN}]]></textFieldExpression>
 			</textField>
 		</band>
-	</summary>
+	</lastPageFooter>
 </jasperReport>
